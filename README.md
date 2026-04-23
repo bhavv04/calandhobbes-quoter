@@ -19,13 +19,13 @@ To use the Calvin and Hobbes Quoter API, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/bhav2134/calandhobbes-quoter
+   git clone https://github.com/bhavv04/calandhobbes-quoter
    cd calandhobbes-quoter
    ```
 2. Install dependencies:
 
    ```
-   pip install flask flask-cors
+   pip install -r requiremnts.txt
    ```
 3. Run the API:
 
