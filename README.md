@@ -1,7 +1,5 @@
 # Calvin and Hobbes Quoter API
 
-![](calandhobbes.gif)
-
 ## Introduction
 
 The Calvin and Hobbes Quoter API is a simple Flask-based RESTful API that provides random quotes from the iconic comic strip Calvin and Hobbes by Bill Watterson. It's a lighthearted way to integrate Calvin and Hobbes's wisdom into your applications or projects.

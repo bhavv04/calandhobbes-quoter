@@ -1,4 +1,4 @@
-const BASE = 'https://calandhobbes-quoter-production.up.railway.app';
+const BASE = '';
 const IMAGES = ['image.png', 'image1.png', 'image2.png', 'image3.png'];
 
 async function fetchQuote() {
