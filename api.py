@@ -252,20 +252,19 @@ CORS(app)
 
 @app.route('/')
 def index():
-    with open('index.html', 'r') as f:
-        return f.read(), 200, {'Content-Type': 'text/html'}
+    return send_from_directory('.', 'index.html')
 
 @app.route('/static/<path:filename>')
 def static_files(filename):
-    return send_from_directory('static', filename) 
+    return send_from_directory('static', filename)
 
 @app.route('/assets/<path:filename>')
 def assets(filename):
     return send_from_directory('assets', filename)
 
-def generate_random_quote():
-    quote = random.choice(quotes)
-    return jsonify(quote)
+@app.route('/api/quotes/random')
+def get_random_quote():
+    return jsonify(random.choice(quotes))
 
 #the json will run on "http://127.0.0.1:8080"
 if __name__ == "__main__":
