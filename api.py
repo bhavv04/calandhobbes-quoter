@@ -1,6 +1,7 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 import random
+import os
 
 quotes = [
     {
@@ -246,15 +247,27 @@ quotes = [
 ]
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 CORS(app)
-@app.route('/api/quotes/random')
+
+@app.route('/')
+def index():
+    with open('index.html', 'r') as f:
+        return f.read(), 200, {'Content-Type': 'text/html'}
+
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    return send_from_directory('static', filename) 
+
+@app.route('/assets/<path:filename>')
+def assets(filename):
+    return send_from_directory('assets', filename)
 
 def generate_random_quote():
     quote = random.choice(quotes)
     return jsonify(quote)
 
-#the json will run on "http://127.0.0.1:8080/api/quotes/random"
+#the json will run on "http://127.0.0.1:8080"
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8080)
-
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
