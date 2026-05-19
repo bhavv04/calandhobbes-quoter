@@ -5,8 +5,7 @@
 }
 
 body {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  background: #fdfaf4;
+  font-family: 'Chalkboard SE', 'Comic Sans MS', 'Arial Rounded MT Bold', 'Marker Felt';  background: #fdfaf4;
   color: #1c1c1c;
   min-height: 100vh;
   display: flex;
