@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "rewrites": [
-    {
-      "source": "/api/quotes/random",
-      "destination": "api.py"
-    }
+  "builds": [
+    { "src": "api/index.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "api/index.py" },
+    { "src": "/(.*)", "dest": "/public/$1" },
+    { "src": "/", "dest": "/public/index.html" }
   ]
 }

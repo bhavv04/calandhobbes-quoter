@@ -1,7 +1,6 @@
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify
 from flask_cors import CORS
 import random
-import os
 
 quotes = [
     {
@@ -247,14 +246,14 @@ quotes = [
 ]
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="public", static_url_path="")
 CORS(app)
 
-@app.route('/api/quotes/random')
+
+@app.route("/api/quotes/random")
 def get_random_quote():
     return jsonify(random.choice(quotes))
 
-#the json will run on "http://127.0.0.1:8080"
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)
+# REQUIRED for Vercel
+def handler(environ, start_response):
+    return app(environ, start_response)
