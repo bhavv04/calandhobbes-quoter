@@ -247,20 +247,8 @@ quotes = [
 ]
 
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__)
 CORS(app)
-
-@app.route('/')
-def index():
-    return send_from_directory('.', 'index.html')
-
-@app.route('/static/<path:filename>')
-def static_files(filename):
-    return send_from_directory('static', filename)
-
-@app.route('/assets/<path:filename>')
-def assets(filename):
-    return send_from_directory('assets', filename)
 
 @app.route('/api/quotes/random')
 def get_random_quote():
