@@ -249,11 +249,6 @@ quotes = [
 app = Flask(__name__, static_folder="public", static_url_path="")
 CORS(app)
 
-
 @app.route("/api/quotes/random")
-def get_random_quote():
+def random_quote():
     return jsonify(random.choice(quotes))
-
-# REQUIRED for Vercel
-def handler(environ, start_response):
-    return app(environ, start_response)
