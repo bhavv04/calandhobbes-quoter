@@ -27,4 +27,46 @@ async function fetchQuote() {
   }
 }
 
+function toggleDocs() {
+  const docs = document.getElementById('docs');
+  const btn = document.getElementById('docs-btn');
+  const open = docs.hidden;
+  docs.hidden = !open;
+  btn.setAttribute('aria-expanded', String(open));
+  btn.textContent = open ? 'Hide docs' : 'How to implement';
+}
+
 fetchQuote();
+
+// Tabs
+document.querySelector('.tabs')?.addEventListener('click', (e) => {
+  const tab = e.target.closest('.tab');
+  if (!tab) return;
+
+  document.querySelectorAll('.tab').forEach((t) => {
+    const active = t === tab;
+    t.classList.toggle('active', active);
+    t.setAttribute('aria-selected', String(active));
+  });
+  document.querySelectorAll('.tab-panel').forEach((p) => {
+    p.classList.toggle('active', p.id === `tab-${tab.dataset.tab}`);
+  });
+});
+
+// Copy buttons
+document.getElementById('docs')?.addEventListener('click', async (e) => {
+  const btn = e.target.closest('.copy');
+  if (!btn) return;
+
+  const target = btn.dataset.copyTarget
+    ? document.getElementById(btn.dataset.copyTarget)
+    : btn.closest('.code-block').querySelector('code');
+
+  try {
+    await navigator.clipboard.writeText(target.textContent);
+    btn.textContent = 'Copied!';
+  } catch {
+    btn.textContent = 'Failed';
+  }
+  setTimeout(() => (btn.textContent = 'Copy'), 1500);
+});

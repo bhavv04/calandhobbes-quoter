@@ -69,3 +69,112 @@ button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
+
+.docs {
+  margin-top: 1.5rem;
+  text-align: left;
+  max-width: 640px;
+  width: 100%;
+  font-family: 'Nunito', sans-serif;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.docs[hidden] { display: none; }
+
+.docs-head h2 {
+  font-family: 'Permanent Marker', cursive;
+  margin: 0 0 0.25rem;
+}
+
+.docs-head p { margin: 0 0 1rem; opacity: 0.85; }
+
+/* endpoint pill */
+.endpoint {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0, 0, 0, 0.07);
+  border-radius: 8px;
+  padding: 0.5rem 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.endpoint code {
+  flex: 1;
+  overflow-x: auto;
+  white-space: nowrap;
+  font-size: 0.85rem;
+}
+
+.method {
+  background: #2e7d32;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+/* tabs */
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.tab {
+  background: red;
+  border: none;
+  padding: 0.5rem 0.9rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.tab.active { opacity: 1; border-bottom-color: currentColor; }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+.tab-panel p { margin: 0 0 0.6rem; }
+
+/* code blocks */
+.code-block { position: relative; margin-bottom: 0.75rem; }
+
+.code-block pre {
+  background: #1e2327;
+  color: #e6edf3;
+  margin: 0;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.docs code { font-family: ui-monospace, Menlo, Consolas, monospace; }
+
+.copy {
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  color: inherit;
+  cursor: pointer;
+}
+
+.code-block .copy {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: #e6edf3;
+}
+
+.docs-foot { margin-top: 1rem; font-size: 0.9rem; }
+.docs-foot a { font-weight: 700; }

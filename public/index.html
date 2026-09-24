@@ -14,7 +14,83 @@
     <img src="/assets/image.png" alt="Calvin and Hobbes">
     <p class="quote loading" id="quote">Loading...</p>
     <p class="author" id="author">— ...</p>
-    <button id="btn" onclick="fetchQuote()">New Quote</button>
+
+    <div class="btn-row">
+      <button id="btn" onclick="fetchQuote()">New Quote</button>
+      <button id="docs-btn" class="secondary" onclick="toggleDocs()"
+              aria-expanded="false" aria-controls="docs">How to implement</button>
+    </div>
+
+    <section id="docs" class="docs" hidden>
+      <header class="docs-head">
+        <h2>Use the API</h2>
+        <p>One <code>GET</code> endpoint returns a random quote as JSON. CORS is enabled, so you can call it straight from the browser.</p>
+      </header>
+
+      <div class="endpoint">
+        <span class="method">GET</span>
+        <code id="endpoint-url">https://calandhobbes-quoter.vercel.app/api/quotes/random</code>
+        <button class="copy" data-copy-target="endpoint-url">Copy</button>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" role="tab" aria-selected="true" data-tab="js">JavaScript</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="react">React</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="local">Run locally</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-js" role="tabpanel">
+        <p>Fetch a quote with plain JavaScript:</p>
+        <div class="code-block">
+          <button class="copy">Copy</button>
+          <pre><code>const res = await fetch('https://calandhobbes-quoter.vercel.app/api/quotes/random');
+const data = await res.json();
+console.log(data);</code></pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-react" role="tabpanel">
+        <p>A reusable hook that fetches from any endpoint:</p>
+        <div class="code-block">
+          <button class="copy">Copy</button>
+          <pre><code>import { useState, useEffect } from 'react';
+
+const useRandomData = (apiEndpoint) =&gt; {
+  const [data, setData] = useState({});
+
+  useEffect(() =&gt; {
+    const fetchData = async () =&gt; {
+      try {
+        const response = await fetch(apiEndpoint);
+        setData(await response.json());
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, [apiEndpoint]);
+
+  return data;
+};</code></pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-local" role="tabpanel">
+        <p>Clone the repo and start the Flask server:</p>
+        <div class="code-block">
+          <button class="copy">Copy</button>
+          <pre><code>git clone https://github.com/bhavv04/calandhobbes-quoter
+cd calandhobbes-quoter
+pip install -r requirements.txt
+python api.py</code></pre>
+        </div>
+        <p>Then open <code>http://127.0.0.1:8080/api/quotes/random</code>.</p>
+      </div>
+
+      <footer class="docs-foot">
+        <a href="https://github.com/bhavv04/calandhobbes-quoter" target="_blank" rel="noopener">View source &amp; full README on GitHub →</a>
+      </footer>
+    </section>
   </div>
 
   <script src="/main.js"></script>
