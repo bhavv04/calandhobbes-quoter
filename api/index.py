@@ -246,9 +246,16 @@ quotes = [
 ]
 
 
-app = Flask(__name__, static_folder="public", static_url_path="")
+app = Flask(__name__, static_folder="../public", static_url_path="")
 CORS(app)
+
+@app.route("/")
+def home():
+    return app.send_static_file("index.html")
 
 @app.route("/api/quotes/random")
 def random_quote():
     return jsonify(random.choice(quotes))
+
+if __name__ == "__main__":
+    app.run(port=8080, debug=True)
