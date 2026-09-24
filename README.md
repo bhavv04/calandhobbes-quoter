@@ -1,46 +1,55 @@
 # Calvin and Hobbes Quoter API
 
-## Introduction
+A lightweight Flask API that serves random quotes from *Calvin and Hobbes* by Bill Watterson.
 
-The Calvin and Hobbes Quoter API is a simple Flask-based RESTful API that provides random quotes from the iconic comic strip Calvin and Hobbes by Bill Watterson. It's a lighthearted way to integrate Calvin and Hobbes's wisdom into your applications or projects.
+**Live API:** https://calandhobbes-quoter.vercel.app
 
 ## Features
 
-- Retrieve random Calvin and Hobbes quotes.
-- Built with Flask for simplicity.
-- Cross-Origin Resource Sharing (CORS) enabled for easy integration.
+- Random Calvin and Hobbes quotes as JSON
+- Built with Flask, with no database or setup required
+- CORS enabled, so you can call it directly from the browser
+- Deployed on Vercel
+
+## Quick start
+
+Try it without installing anything:
+
+```bash
+curl https://calandhobbes-quoter.vercel.app/api/quotes/random
+```
+
+## API reference
+
+### `GET /api/quotes/random`
+
+Returns one random quote.
+
+**Example response**
+
+```json
+{
+  "quote": "It's not a dilemma, it's a trade-off.",
+  "author": "Calvin"
+}
+```
+
+| Field    | Type   | Description                  |
+| -------- | ------ | ---------------------------- |
+| `quote`  | string | The quote text               |
+| `author` | string | The character who said it    |
 
 ## Usage
 
-To use the Calvin and Hobbes Quoter API, follow these steps:
+### JavaScript
 
-1. Clone the repository:
+```javascript
+const res = await fetch('https://calandhobbes-quoter.vercel.app/api/quotes/random');
+const data = await res.json();
+console.log(data.quote, '-', data.author);
+```
 
-   ```bash
-   git clone https://github.com/bhavv04/calandhobbes-quoter
-   cd calandhobbes-quoter
-   ```
-2. Install dependencies:
-
-   ```
-   pip install -r requiremnts.txt
-   ```
-3. Run the API:
-
-   ```
-   python api.py
-   ```
-4. Head to the server to view the JSON file:
-
-   ```
-   http://127.0.0.1:8080/api/quotes/random
-   ```
-
-## Implementation
-
-This example demonstrates how to fetch random data from an API in various programming languages.
-
-### JavaScript/React
+### React
 
 ```javascript
 import { useState, useEffect } from 'react';
@@ -52,8 +61,7 @@ const useRandomData = (apiEndpoint) => {
     const fetchData = async () => {
       try {
         const response = await fetch(apiEndpoint);
-        const result = await response.json();
-        setData(result);
+        setData(await response.json());
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -64,10 +72,73 @@ const useRandomData = (apiEndpoint) => {
   return data;
 };
 
-// Example usage:
 const QuoteComponent = () => {
-  const quote = useRandomData('http://127.0.0.1:8080/api/quotes/random');
+  const quote = useRandomData('https://calandhobbes-quoter.vercel.app/api/quotes/random');
 
-  // Your component logic with the fetched data...
+  return (
+    <blockquote>
+      <p>{quote.quote}</p>
+      <footer>- {quote.author}</footer>
+    </blockquote>
+  );
 };
 ```
+
+### Python
+
+```python
+import requests
+
+data = requests.get("https://calandhobbes-quoter.vercel.app/api/quotes/random").json()
+print(f'{data["quote"]} - {data["author"]}')
+```
+
+## Run locally
+
+1. Clone the repository:
+
+```bash
+   git clone https://github.com/bhavv04/calandhobbes-quoter
+   cd calandhobbes-quoter
+```
+
+2. (Optional) Create a virtual environment:
+
+```bash
+   python -m venv venv
+   source venv/bin/activate   # Windows: venv\Scripts\activate
+```
+
+3. Install dependencies:
+
+```bash
+   pip install -r requirements.txt
+```
+
+4. Start the server:
+
+```bash
+   python app.py
+```
+
+5. Open http://127.0.0.1:8080/api/quotes/random
+
+## Project structure
+
+```
+calandhobbes-quoter/
+├── api/                # API code
+├── public/             # Front-end (index.html, styles.css, main.js)
+├── app.py              # Local entry point
+├── requirements.txt    # Python dependencies
+├── vercel.json         # Vercel deployment config
+└── Procfile            # Process definition
+```
+
+## Contributing
+
+Issues and pull requests are welcome.
+
+## License
+
+Released under the [MIT License](LICENSE).
